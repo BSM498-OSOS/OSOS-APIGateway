@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Abstract.ReadingApi;
+using Business.BusinessAspects.Autofac;
 using Business.Consts;
 using Core.Utilities.Results;
 using Entity.Concrete;
@@ -20,7 +21,7 @@ namespace Business.Concrete.ReadingApi
             _httpClient = factory.CreateClient();
             _httpClient.BaseAddress = UrlService.ReadingApiUrl;
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<List<Reading>>> GetAll()
         {
             var response = await _httpClient.GetAsync("getAllReadings");
@@ -32,7 +33,7 @@ namespace Business.Concrete.ReadingApi
             }
             return new ErrorDataResult<List<Reading>>();
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<List<ReadingConsumptionDto>>> GetAllConsumptions()
         {
             var response = await _httpClient.GetAsync("getAllTotalConsumptions");
@@ -44,7 +45,7 @@ namespace Business.Concrete.ReadingApi
             }
             return new ErrorDataResult<List<ReadingConsumptionDto>>();
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<List<ReadingConsumption>>> GetAllConsumptionsDaily()
         {
             var response = await _httpClient.GetAsync("getAllTotalConsumptionDaily");
@@ -56,7 +57,7 @@ namespace Business.Concrete.ReadingApi
             }
             return new ErrorDataResult<List<ReadingConsumption>>();
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<List<ReadingConsumption>>> GetAllConsumptionsMontly()
         {
             var response = await _httpClient.GetAsync("getAllTotalConsumptionMonthly");
@@ -68,7 +69,7 @@ namespace Business.Concrete.ReadingApi
             }
             return new ErrorDataResult<List<ReadingConsumption>>();
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<List<ReadingConsumption>>> GetAllConsumptionsYearly()
         {
             var response = await _httpClient.GetAsync("getAllTotalConsumptionYearly");
@@ -80,7 +81,7 @@ namespace Business.Concrete.ReadingApi
             }
             return new ErrorDataResult<List<ReadingConsumption>>();
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<List<Reading>>> GetByDates(DateTime minDate, DateTime maxDate)
         {
             var response = await _httpClient.GetAsync($"getAllReadingsbyDates?minDate={minDate.Year}-{minDate.Month}-{minDate.Day}&maxDate={maxDate.Year}-{maxDate.Month}-{maxDate.Day}");
@@ -92,7 +93,7 @@ namespace Business.Concrete.ReadingApi
             }
             return new ErrorDataResult<List<Reading>>();
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<List<Reading>>> GetBySerialNo(int serialNo)
         {
             var response = await _httpClient.GetAsync($"getReadingsBySerialNo?serialNo={serialNo}");
@@ -104,7 +105,7 @@ namespace Business.Concrete.ReadingApi
             }
             return new ErrorDataResult<List<Reading>>();
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<List<ReadingConsumption>>> GetConsumptionsDailyBySerialNo(int serialNo)
         {
             var response = await _httpClient.GetAsync($"getTotalConsumptionDailyBySerialNo?serialNo={serialNo}");
@@ -116,7 +117,7 @@ namespace Business.Concrete.ReadingApi
             }
             return new ErrorDataResult<List<ReadingConsumption>>();
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<List<ReadingConsumption>>> GetConsumptionsMontlyBySerialNo(int serialNo)
         {
             var response = await _httpClient.GetAsync($"getTotalConsumptionMonthlyBySerialNo?serialNo={serialNo}");
@@ -128,7 +129,7 @@ namespace Business.Concrete.ReadingApi
             }
             return new ErrorDataResult<List<ReadingConsumption>>();
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<List<ReadingConsumption>>> GetConsumptionsYearlyBySerialNo(int serialNo)
         {
             var response = await _httpClient.GetAsync($"getTotalConsumptionYearlyBySerialNo?serialNo={serialNo}");

@@ -25,7 +25,6 @@ namespace Business.Concrete.AuthApi
             _httpClient = factory.CreateClient();
             _httpClient.BaseAddress = UrlService.AuthApiUrl;
         }
-
         public async Task<IDataResult<AccessToken>> Login(UserForLoginDto userForLoginDto)
         {
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(userForLoginDto);
@@ -39,7 +38,6 @@ namespace Business.Concrete.AuthApi
             }
             return new ErrorDataResult<AccessToken>("Some Problem");
         }
-
         public async Task<IDataResult<AccessToken>> Register(UserForRegisterDto userForRegisterDto)
         {
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(userForRegisterDto);

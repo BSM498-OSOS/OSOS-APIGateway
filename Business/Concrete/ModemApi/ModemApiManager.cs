@@ -34,7 +34,7 @@ namespace Business.Concrete.ModemApi
         }
 
 
-        //[SecuredOperation("Admin")]
+        [SecuredOperation("Admin")]
         public Task<HttpResponseMessage> Delete(Modem modem)
         {
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(modem);
@@ -43,7 +43,7 @@ namespace Business.Concrete.ModemApi
         }
 
 
-        //[SecuredOperation("User")]
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<List<Modem>>> GetAll()
         {
             var response = await _httpClient.GetAsync("getAllModems");
@@ -55,7 +55,7 @@ namespace Business.Concrete.ModemApi
             }
             return new ErrorDataResult<List<Modem>>();
         }
-        //[SecuredOperation("User")]
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<List<ModemWithCompleteInfoDto>>> GetAllWithCompleteInfo()
         {
             var response = await _httpClient.GetAsync("getAllModemsWithCompleteInfo");
@@ -68,7 +68,7 @@ namespace Business.Concrete.ModemApi
             }
             return new ErrorDataResult<List<ModemWithCompleteInfoDto>>();
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<Modem>> GetById(Guid modemId)
         {
             var response = await _httpClient.GetAsync($"getModemById?id={modemId}");
@@ -80,7 +80,7 @@ namespace Business.Concrete.ModemApi
             }
             return new ErrorDataResult<Modem>();
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<ModemWithCompleteInfoDto>> GetWithCompleteInfoById(Guid modemId)
         {
             var response = await _httpClient.GetAsync($"getModemWithCompleteInfoById?id={modemId}");

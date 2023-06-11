@@ -1,4 +1,5 @@
 ﻿using Business.Abstract.AuthApi;
+using Business.BusinessAspects.Autofac;
 using Business.Consts;
 using Core.Entities.Concrete;
 using Core.Utilities.Results;
@@ -19,7 +20,7 @@ namespace Business.Concrete.AuthApi
             _httpClient = factory.CreateClient();
             _httpClient.BaseAddress = UrlService.AuthOperationClaimsApiUrl;
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<List<OperationClaim>>> GetAll()
         {
             

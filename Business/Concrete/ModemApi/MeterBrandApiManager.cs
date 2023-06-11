@@ -36,7 +36,7 @@ namespace Business.Concrete.ModemApi
             var data = new StringContent(json, Encoding.UTF8, "application/json");
             return _httpClient.SendAsync(new HttpRequestMessage { RequestUri = new Uri(_httpClient.BaseAddress.ToString() + "deleteBrand"), Content = data, Method = HttpMethod.Delete });
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<List<ModemBrand>>> GetAll()
         {
             var response = await _httpClient.GetAsync("getAllBrands");
@@ -48,7 +48,7 @@ namespace Business.Concrete.ModemApi
             }
             return new ErrorDataResult<List<ModemBrand>>();
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<ModemBrand>> GetById(Guid modemBrandId)
         {
             var response = await _httpClient.GetAsync($"getBrandById?id={modemBrandId}");

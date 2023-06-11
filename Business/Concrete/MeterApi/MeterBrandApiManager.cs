@@ -36,7 +36,7 @@ namespace Business.Concrete.MeterApi
             var data = new StringContent(json, Encoding.UTF8, "application/json");
             return _httpClient.SendAsync(new HttpRequestMessage { RequestUri = new Uri(_httpClient.BaseAddress.ToString() + "deleteBrand"), Content = data, Method = HttpMethod.Delete });
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<List<MeterBrand>>> GetAll()
         {
             var response = await _httpClient.GetAsync("getAllBrands");
@@ -48,7 +48,7 @@ namespace Business.Concrete.MeterApi
             }
             return new ErrorDataResult<List<MeterBrand>>();
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<MeterBrand>> GetById(Guid meterBrandId)
         {
             var response = await _httpClient.GetAsync($"getBrandById?id={meterBrandId}");

@@ -44,7 +44,7 @@ namespace Business.Concrete.MeterApi
         }
 
 
-        //[SecuredOperation("User")]
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<List<Meter>>> GetAll()
         {
             var response = await _httpClient.GetAsync("getAllMeters");
@@ -56,7 +56,7 @@ namespace Business.Concrete.MeterApi
             }
             return new ErrorDataResult<List<Meter>>();
         }
-        //[SecuredOperation("User")]
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<List<MeterWithCompleteInfoDto>>> GetAllWithCompleteInfo()
         {
             var response = await _httpClient.GetAsync("getAllMetersWithCompleteInfo");
@@ -69,7 +69,7 @@ namespace Business.Concrete.MeterApi
             }
             return new ErrorDataResult<List<MeterWithCompleteInfoDto>>();
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<Meter>> GetById(Guid meterId)
         {
             var response = await _httpClient.GetAsync($"getMeterById?id={meterId}");
@@ -81,7 +81,7 @@ namespace Business.Concrete.MeterApi
             }
             return new ErrorDataResult<Meter>();
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<Meter>> GetBySerialNo(int serialNo)
         {
             var response = await _httpClient.GetAsync($"getMeterBySerialNo?serialNo={serialNo}");
@@ -93,7 +93,7 @@ namespace Business.Concrete.MeterApi
             }
             return new ErrorDataResult<Meter>();
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<MeterWithCompleteInfoDto>> GetWithCompleteInfoById(Guid meterId)
         {
             var response = await _httpClient.GetAsync($"getMeterWithCompleteInfoById?id={meterId}");
@@ -105,7 +105,7 @@ namespace Business.Concrete.MeterApi
             }
             return new ErrorDataResult<MeterWithCompleteInfoDto>();
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<MeterWithCompleteInfoDto>> GetWithCompleteInfoBySerialNo(int serialNo)
         {
             var response = await _httpClient.GetAsync($"getMeterWithCompleteInfoBySerialNo?serialNo={serialNo}");

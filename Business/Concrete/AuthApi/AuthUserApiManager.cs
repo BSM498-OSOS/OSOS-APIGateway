@@ -1,4 +1,5 @@
 ﻿using Business.Abstract.AuthApi;
+using Business.BusinessAspects.Autofac;
 using Business.Consts;
 using Core.Entities.Concrete;
 using Core.Utilities.Results;
@@ -21,6 +22,7 @@ namespace Business.Concrete.AuthApi
             _httpClient.BaseAddress = UrlService.AuthUserApiUrl;
         }
 
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<List<UserWithCompleteInfoDto>>> GetAll()
         {
             var response = await _httpClient.GetAsync("getAllUser");
@@ -32,7 +34,7 @@ namespace Business.Concrete.AuthApi
             }
             return new ErrorDataResult<List<UserWithCompleteInfoDto>>();
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<UserWithCompleteInfoDto>> GetById(Guid id)
         {
             var response = await _httpClient.GetAsync($"getUserByID?id={id}");

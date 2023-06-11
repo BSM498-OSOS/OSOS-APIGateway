@@ -35,7 +35,7 @@ namespace Business.Concrete.ModemApi
             var data = new StringContent(json, Encoding.UTF8, "application/json");
             return _httpClient.SendAsync(new HttpRequestMessage { RequestUri = new Uri(_httpClient.BaseAddress.ToString() + "deleteModel"), Content = data, Method = HttpMethod.Delete });
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<List<ModemModel>>> GetAll()
         {
             var response = await _httpClient.GetAsync("getAllModels");
@@ -47,7 +47,7 @@ namespace Business.Concrete.ModemApi
             }
             return new ErrorDataResult<List<ModemModel>>();
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<ModemModel>> GetById(Guid modemModelId)
         {
             var response = await _httpClient.GetAsync($"getModelById?id={modemModelId}");

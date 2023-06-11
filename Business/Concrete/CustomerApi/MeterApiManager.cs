@@ -24,7 +24,7 @@ namespace Business.Concrete.CustomerApi
             _httpClient = factory.CreateClient();
             _httpClient.BaseAddress = UrlService.CustomerApiUrl;
         }
-
+        [SecuredOperation("Admin")]
         public Task<HttpResponseMessage> Add(Customer customer)
         {
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(customer);
@@ -41,7 +41,7 @@ namespace Business.Concrete.CustomerApi
             return _httpClient.SendAsync(new HttpRequestMessage { RequestUri = new Uri(_httpClient.BaseAddress.ToString() + "deleteCustomer"), Content = data, Method = HttpMethod.Delete });
         }
 
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<List<Customer>>> GetAll()
         {
             var response = await _httpClient.GetAsync("getAllCustomers");
@@ -53,7 +53,7 @@ namespace Business.Concrete.CustomerApi
             }
             return new ErrorDataResult<List<Customer>>();
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<Customer>> GetById(Guid customerId)
         {
             var response = await _httpClient.GetAsync($"getCustomerById?id={customerId}");
@@ -65,7 +65,7 @@ namespace Business.Concrete.CustomerApi
             }
             return new ErrorDataResult<Customer>();
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<Customer>> GetByMeterSerialNo(int serialNo)
         {
             var response = await _httpClient.GetAsync($"getCustomerByMeterId?meterId={serialNo}");

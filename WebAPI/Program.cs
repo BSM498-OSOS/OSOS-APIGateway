@@ -25,7 +25,8 @@ namespace WebAPI
                                   {
                                       builder.WithOrigins("http://localhost:3000",
                                                           "http://localhost:8080",
-                                                          "http://docker.host.internal:3000")
+                                                          "http://docker.host.internal:3000",
+                                                          "http://192.168.1.110:3000")
                                                     .AllowAnyHeader()
                                                     .AllowAnyMethod();
                                   });

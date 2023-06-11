@@ -35,7 +35,7 @@ namespace Business.Concrete.MeterApi
             var data = new StringContent(json, Encoding.UTF8, "application/json");
             return _httpClient.SendAsync(new HttpRequestMessage { RequestUri = new Uri(_httpClient.BaseAddress.ToString() + "deleteModel"), Content = data, Method = HttpMethod.Delete });
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<List<MeterModel>>> GetAll()
         {
             var response = await _httpClient.GetAsync("getAllModels");
@@ -47,7 +47,7 @@ namespace Business.Concrete.MeterApi
             }
             return new ErrorDataResult<List<MeterModel>>();
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<MeterModel>> GetById(Guid meterModelId)
         {
             var response = await _httpClient.GetAsync($"getModelById?id={meterModelId}");

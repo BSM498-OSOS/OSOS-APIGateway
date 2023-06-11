@@ -1,4 +1,5 @@
 ﻿using Business.Abstract.MeterApi;
+using Business.BusinessAspects.Autofac;
 using Business.Consts;
 using Core.Utilities.Results;
 using Entities.Models.MeterApi;
@@ -18,7 +19,7 @@ namespace Business.Concrete.MeterApi
             _httpClient = factory.CreateClient();
             _httpClient.BaseAddress = UrlService.MeterReadingTimeApiUrl;
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<List<ReadingTime>>> GetAll()
         {
             var response = await _httpClient.GetAsync("getAllReadingTimes");
@@ -30,7 +31,7 @@ namespace Business.Concrete.MeterApi
             }
             return new ErrorDataResult<List<ReadingTime>>();
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IDataResult<ReadingTime>> GetById(Guid id)
         {
             var response = await _httpClient.GetAsync($"getReadingTimeById?id={id}");
